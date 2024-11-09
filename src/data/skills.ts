@@ -1,0 +1,57 @@
+export const skillsData = {
+  cloudInfrastructure: {
+    category: 'Cloud & Infrastructure',
+    skills: [
+      'GCP',
+      'Vertex AI',
+      'BigQuery',
+      'Pub/Sub',
+      'CloudRun',
+      'AppEngine',
+      'CloudFunctions',
+      'AWS',
+      'EC2',
+      'S3',
+      'RDS',
+    ],
+  },
+  programmingAndML: {
+    category: 'Programming & ML',
+    skills: [
+      'Python',
+      'OpenAI',
+      'Langchain',
+      'PyTorch',
+      'TensorFlow',
+      'scikit-learn',
+      'pandas',
+      'numpy',
+      'spaCy',
+      'BERT',
+    ],
+  },
+  dataAndDevOps: {
+    category: 'Data & DevOps',
+    skills: [
+      'PostgreSQL',
+      'MongoDB',
+      'Redis',
+      'Cassandra',
+      'Docker',
+      'Kubernetes',
+      'GitLab',
+      'GitHub',
+      'DVC',
+    ],
+  },
+  visualizationAndBI: {
+    category: 'Visualization & BI',
+    skills: [
+      'Tableau',
+      'Looker Studio',
+      'MicroStrategy',
+      'Plotly',
+      'QlikView',
+    ],
+  },
+}; 
