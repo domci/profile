@@ -47,6 +47,7 @@
     - Favor server components and Next.js SSR.
     - Use only for Web API access in small components.
     - Avoid for data fetching or state management.
+  - use bun for package management
   
   Follow Next.js docs for Data Fetching, Rendering, and Routing.
   
