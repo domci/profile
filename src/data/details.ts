@@ -4,6 +4,8 @@ export interface AdditionalDetails {
     locationPreferences: string;
     availability: string;
     jobTypes: string[];
+    contact: string;
+    github: string;
   }
   
   export const additionalDetails: AdditionalDetails = {
@@ -12,4 +14,6 @@ export interface AdditionalDetails {
     locationPreferences: 'Remote',
     availability: '3 months',
     jobTypes: ['Full-time', 'Contracting', 'Freelance', 'Consulting'],
+    contact: 'https://www.linkedin.com/in/dominik-cichon-1aa400a0/',
+    github: 'https://github.com/domci',
   };
