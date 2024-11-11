@@ -8,8 +8,18 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "John Doe - Fish Shell Portfolio",
-  description: "John Doe's Portfolio styled like the fish shell terminal.",
+  title: "Dominik - AI & Data Engineering Portfolio",
+  description: "Senior Machine Learning Engineer with +10 years of experience in AI, ML, and Data Engineering. Specializing in GenAI, cloud platforms, and building scalable data products.",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
 };
 
 export default function RootLayout({

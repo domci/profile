@@ -15,13 +15,25 @@ export interface EducationEntry {
 }
 
 export interface TechnicalSkills {
+  generativeAI: string[];
   cloudPlatforms: string[];
-  programmingLibraries: string[];
+  programmingLanguages: string[];
   databasesAndQuerying: string[];
   dataOrchestrationTools: string[];
   visualizationTools: string[];
   versionControlAndWorkflow: string[];
   containersAndOS: string[];
+}
+
+export interface Project {
+  title: string;
+  screenshot: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
+  liveUrl: string;
 }
 
 export interface ResumeData {
@@ -33,13 +45,14 @@ export interface ResumeData {
   technicalSkills: TechnicalSkills;
   languages: string[];
   softSkills: string[];
+  projects: Project[];
 }
 
 export const resumeData: ResumeData = {
   name: 'Dominik',
-  title: 'Passionate about Data.',
+  title: 'Passionate about AI and Data.',
   summary:
-    '+9 years of industry experience in collecting, organizing, analyzing, visualizing data, and deploying various ML- and Data-Products. Customer-oriented, curious, and fast-learning engineer, determined to build amazing data products.',
+    '+10 years of industry experience in collecting, organizing, analyzing, visualizing data, and deploying various AI- and Data-Products. Customer-oriented, curious, and fast-learning engineer, determined to build amazing data products.',
   experiences: [
     {
       title: 'Senior Machine Learning Engineer',
@@ -47,11 +60,12 @@ export const resumeData: ResumeData = {
       startDate: 'Jan. 2024',
       endDate: 'Present',
       responsibilities: [
-        'Developed a GenAI-based Partner Chat-Bot with RAG pipeline in Azure Cloud',
-        'Introduced a Kill Switch for all team projects to handle critical security issues',
-        'Implemented a Budget Watchdog for Azure resources',
-        'Acted as a sparring partner for business and product teams on GenAI and ML topics',
-        'Oversaw security protocols within the team',
+        'GenAI-based Partner Chat-Bot with RAG pipeline in Azure Cloud',
+        'enforcement of Chatbot security, compliance and quality of answers',
+        'Kill Switch for all team projects to handle critical security issues',
+        'Budget Watchdog for Azure resources',
+        'Sparring partner for business and product teams on GenAI and ML topics',
+        'Responsible for data and IT security protocols within the team',
       ],
     },
     {
@@ -60,8 +74,8 @@ export const resumeData: ResumeData = {
       startDate: 'Feb. 2023',
       endDate: 'Dec. 2024',
       responsibilities: [
-        'Established a comprehensive ML framework utilizing Cookiecutter, Vertex AI, DVC, and KubeFlow',
-        'Created ML pipelines focusing on supply chain demand projections, revenue forecasting, and shop acquisition price estimations',
+        'comprehensive ML framework utilizing Cookiecutter, Vertex AI, DVC, and KubeFlow',
+        'ML pipelines for on supply chain demand projections, revenue forecasting, and shop acquisition price estimations',
         'Integrated AI chat functionalities into primary brand management dashboards',
         'Designed and maintained data pipelines using Dagster, dbt, BigQuery, and various data sources',
         'Extracted contact details via web scraping for B2B campaigns',
@@ -85,7 +99,7 @@ export const resumeData: ResumeData = {
     },
     {
       title: 'Analytical Consultant',
-      company: 'Google Germany GmbH (Contractor via Adecco)',
+      company: 'Google Germany GmbH',
       startDate: 'Aug. 2019',
       endDate: 'June 2020',
       responsibilities: [
@@ -134,50 +148,94 @@ export const resumeData: ResumeData = {
         '- Corporate controlling',
         '- Financial management',
       ],
+    }
+  ],
+  projects: [
+    {
+      title: "unclutter.pages.dev",
+      screenshot: {
+        src: "/projects/unclutter.png",
+        alt: "Resume Builder Dashboard",
+        width: 1920,
+        height: 1080
+      },
+      liveUrl: "https://unclutter.pages.dev"
     },
     {
-      degree: 'Dual B.A. Studies: BWL Gastronomiemanagement',
-      institution: 'McDonald’s Franchisee Wilfried Cichon e.K. & IBA - University of Cooperative Education',
-      startDate: 'Oct. 2009',
-      endDate: 'Sept. 2012',
-      details: [
-        'Bachelor thesis: "Balanced Scorecard als strategisches Führungsinstrument in der Systemgastronomie" (Grade: 1.0)',
-        'Practical training to deputy restaurant manager at McDonald’s',
-        'Studies included:',
-        '- Statistics',
-        '- Economics',
-        '- International accounting',
-        '- Mathematics',
-        '- Marketing',
-      ],
+      title: "@LongLifeEasy",
+      screenshot: {
+        src: "/projects/longlive.png",
+        alt: "@LongLifeEasy",
+        width: 1920,
+        height: 1080
+      },
+      liveUrl: "https://x.com/LongLifeEasy"
     },
     {
-      degree: 'Apprenticeship as IT Management Assistant (Informatikkaufmann)',
-      institution: 'c.a.r.u.s. Information Technology AG',
-      startDate: 'Aug. 2004',
-      endDate: 'July 2007',
-      details: [],
+      title: "@BitcoinBottomTop",
+      screenshot: {
+        src: "/projects/btc.png",
+        alt: "@BitcoinBottomTop",
+        width: 1920,
+        height: 1080
+      },
+      liveUrl: "https://x.com/btc_bottom_top"
     },
     {
-      degree: 'Advanced Technical College Certificate (Fachhochschulreife)',
-      institution: 'Vocational School of Segeberg, Norderstedt',
-      startDate: 'Aug. 2002',
-      endDate: 'June 2004',
-      details: [],
+      title: "@OnThisDay",
+      screenshot: {
+        src: "/projects/onthisday.png",
+        alt: "@OnThisDay",
+        width: 1920,
+        height: 1080
+      },
+      liveUrl: "https://x.com/I_remebr_today"
     },
+    {
+      title: "@domLLM",
+      screenshot: {
+        src: "/projects/domllm.png",
+        alt: "@domLLM",
+        width: 1920,
+        height: 1080
+      },
+      liveUrl: "https://x.com/DomLLM"
+    },
+    {
+      title: "Quizzly (WiP)",
+      screenshot: {
+        src: "/projects/quizzly.png",
+        alt: "Quizzly",
+        width: 1920,
+        height: 1080
+      },
+      liveUrl: ""
+    }    ,
+    {
+      title: "Quantum Crumbs Books",
+      screenshot: {
+        src: "/projects/quantumcrumbs.png",
+        alt: "Quantum Crumbs Books",
+        width: 1920,
+        height: 1080
+      },
+      liveUrl: "https://www.amazon.com/dp/B0DLH7WSCF"
+    }
   ],
   technicalSkills: {
-    cloudPlatforms: [
-      'Google Cloud Platform (Vertex AI, BigQuery, Pub/Sub, CloudRun, AppEngine, CloudFunctions, DataProc, Datastore, Compute Engine)',
-      'Amazon AWS (EC2, S3, RDS)',
+    generativeAI: [
+      'OpenAI', 'Gemini', 'Anthropic', 'Groq', 'LlamaIndex', 'LangChain', 'Vercel AI SDK', 'Hugging Face', 'Cloudflare AI',
     ],
-    programmingLibraries: [
-      'Python (openai, langchain, streamlit, XGBoost, Jupyter, pandas, scikit-learn, spaCy, MLFlow, KubeFlow, Flask, FastAPI, numPy, BeautifulSoup, requests, selenium, PyTorch, Keras, pySpark, TensorFlow, BERT)',
-      'LLMs, OpenAI, Google PaLM & Bard, LlamaIndex, LangChain',
+    cloudPlatforms: [
+      'GCP', 'Vertex AI', 'BigQuery', 'Pub/Sub', 'CloudRun', 'AppEngine', 'CloudFunctions', 'DataProc', 'Datastore', 'Compute Engine',
+      'AWS', 'EC2', 'S3', 'RDS',
+      'Azure', 'Azure OpenAI', 'Azure Cognitive Services', 'Azure SQL', 'Container Apps', 'VMs'
+    ],
+    programmingLanguages: [
+      'Python', 'Typescript', 'Next.js', 'R', 'SQL', 'NoSQL',
     ],
     databasesAndQuerying: [
-      'SQL: BigQuery, Exasol, PostgreSQL',
-      'NoSQL: MongoDB, Hive, MapR, Redis, Cassandra',
+      'BigQuery', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'SQLite', 'Exasol', 'DuckDB',
     ],
     dataOrchestrationTools: ['Dagster', 'Airflow', 'Prefect'],
     visualizationTools: [
@@ -188,6 +246,7 @@ export const resumeData: ResumeData = {
       'Plotly',
       'QlikView',
       'Plex',
+      'Power BI',
     ],
     versionControlAndWorkflow: ['GitLab', 'GitHub', 'DVC'],
     containersAndOS: ['Docker', 'Linux', 'Windows', 'macOS'],

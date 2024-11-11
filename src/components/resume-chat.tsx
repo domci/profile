@@ -9,7 +9,12 @@ interface Message {
 }
 
 export function ResumeChat() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: 'assistant',
+      content: 'Hi! I can help you learn more about 🔥 Dominik 🔥. What would you like to know?'
+    }
+  ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
