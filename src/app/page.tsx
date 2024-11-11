@@ -58,8 +58,9 @@ export default function ProfilePage() {
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: 'url("/placeholder.svg?height=2000&width=3000&text=Data+Passion")',
-          backgroundSize: 'cover',
+          backgroundImage: 'url("/background.svg")',
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
         }}
       />

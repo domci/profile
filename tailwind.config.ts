@@ -68,10 +68,28 @@ const config: Config = {
   				'50%': { 
   					transform: 'translateY(-10px) scale(1.05)',
   				}
+  			},
+  			'soundwave': {
+  				'0%, 100%': { 
+  					transform: 'scaleY(0.5)',
+  				},
+  				'50%': { 
+  					transform: 'scaleY(1.5)',
+  				}
+  			},
+  			'spin-slow': {
+  				'0%': { 
+  					transform: 'rotate(0deg)',
+  				},
+  				'100%': { 
+  					transform: 'rotate(360deg)',
+  				}
   			}
   		},
   		animation: {
   			'bounce-subtle': 'bounce-subtle 2s ease-in-out infinite',
+  			'soundwave': 'soundwave 1s ease-in-out infinite',
+  			'spin-slow': 'spin-slow 4s linear infinite',
   		}
   	}
   },

@@ -1,5 +1,6 @@
 import { resumeData } from '@/data/resume';
 import Image from 'next/image';
+import { AudioPlayer } from '@/components/audio-player';
 
 export function Resume() {
   return (
@@ -31,7 +32,9 @@ export function Resume() {
             ))}
           </div>
 
-
+          <div className="flex items-center justify-center mb-12">
+            <AudioPlayer audioUrl="/audio/podcast.wav" />
+          </div>
 
           <div className="flex flex-wrap justify-center gap-8 mb-12">
             {resumeData.experiences.map((exp) => (
@@ -50,7 +53,6 @@ export function Resume() {
             ))}
           </div>
 
-
           <div className="max-w-2xl mx-auto mb-12">
             <div className="inline-block px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30">
               <h3 className="text-xl font-semibold text-blue-400 mb-2">Currently Available For:</h3>
@@ -67,7 +69,6 @@ export function Resume() {
               </div>
             </div>
           </div>
-
 
           <div className="flex flex-col items-center space-y-6">
             <a
