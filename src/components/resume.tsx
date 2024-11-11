@@ -39,19 +39,18 @@ export function Resume() {
             />
           </div>
 
-          <div className="flex flex-wrap justify-center gap-8 mb-12">
+          <div className="flex flex-wrap justify-center items-center gap-8 mb-12">
             {resumeData.experiences.map((exp) => (
-              <div
-                key={exp.company}
-                className="relative w-24 h-24 transition-all duration-300"
-              >
-                <Image
-                  src={`/companies/${exp.company.toLowerCase().replace(/\s+/g, '-')}.png`}
+              <div key={exp.company} className="flex items-center">
+                <img
+                  src={`/companies/${exp.company
+                    .toLowerCase()
+                    .replace(/[&]/g, 'and')
+                    .replace(/[^\w-]+/g, '-')
+                    .replace(/-+/g, '-')
+                    .replace(/^-|-$/g, '')}.svg`}
                   alt={`${exp.company} logo`}
-                  width={96}
-                  height={96}
-                  className="object-contain w-full h-full"
-                  quality={100}
+                  className="h-7 w-auto"
                 />
               </div>
             ))}
