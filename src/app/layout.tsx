@@ -20,6 +20,17 @@ export const metadata: Metadata = {
       noimageindex: true,
     },
   },
+  verification: {
+    google: 'none',
+    yandex: 'none',
+    yahoo: 'none',
+    other: {
+      'msvalidate.01': 'none',
+    },
+  },
+  alternates: {
+    canonical: null,
+  },
 };
 
 export default function RootLayout({

@@ -16,8 +16,16 @@ const openai = new OpenAI({
   baseURL: `https://gateway.ai.cloudflare.com/v1/${process.env.CF_ACCOUNT_ID}/${process.env.CF_GATEWAY_ID}/openai`,
 });
 
+// Add interface for the request body
+interface ChatRequestBody {
+  messages: Array<{
+    role: 'user' | 'assistant' | 'system';
+    content: string;
+  }>;
+}
+
 export async function POST(req: NextRequest) {
-  const { messages } = await req.json();
+  const { messages } = (await req.json()) as ChatRequestBody;
 
   if (!messages || !Array.isArray(messages)) {
     return new Response('Messages are required', { status: 400 });

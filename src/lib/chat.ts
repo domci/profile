@@ -7,7 +7,7 @@ function formatResumeData(data: typeof resumeData): string {
       (exp) => `
 Title: ${exp.title}
 Company: ${exp.company}
-Period: ${exp.period}
+Duration: ${exp.startDate} - ${exp.endDate}
 Responsibilities:
 ${exp.responsibilities.map((resp) => `- ${resp}`).join('\n')}
 `
@@ -28,8 +28,12 @@ ${experiences}
 function formatAdditionalDetails(details: typeof additionalDetails): string {
   return `
 Salary Expectations: ${details.salaryExpectations}
+Hourly Rate: ${details.hourlyRate}
 Location Preferences: ${details.locationPreferences}
 Availability: ${details.availability}
+Job Types: ${details.jobTypes.join(', ')}
+LinkedIn: ${details.contact}
+GitHub: ${details.github}
 `;
 }
 
@@ -49,6 +53,9 @@ Recruiters can chat with you about Dominik (Dom).
 Act as Dominik's best buddy and help him.
 Be funny, and advocate for Dominik in a cool way.
 Use a lax conversation style.
+Never ever promise to contact Dominik.
+Just give my LinkedIn profile URL.
+
 
 Here is my resume:
 

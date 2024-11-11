@@ -1,11 +1,22 @@
 'use client';
 
-import { useState, FormEvent, ChangeEvent } from 'react';
+import { useState, FormEvent, ChangeEvent, useRef, useEffect } from 'react';
 import { fetchChatResponse } from '@/lib/chat';
+import ReactMarkdown from 'react-markdown';
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
+}
+
+function LoadingDots() {
+  return (
+    <div className="flex items-center space-x-1">
+      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
+      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
+      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+    </div>
+  );
 }
 
 export function ResumeChat() {
@@ -17,6 +28,17 @@ export function ResumeChat() {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isWaitingForFirstResponse, setIsWaitingForFirstResponse] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Scroll when messages change
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     setInput(e.target.value);
@@ -30,9 +52,11 @@ export function ResumeChat() {
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
+    setIsWaitingForFirstResponse(true);
 
     try {
       await fetchChatResponse([...messages, userMessage], (delta) => {
+        setIsWaitingForFirstResponse(false);
         setMessages((prevMessages) => {
           const lastMessage = prevMessages[prevMessages.length - 1];
 
@@ -51,6 +75,7 @@ export function ResumeChat() {
       console.error('Error fetching chat response:', error);
     } finally {
       setIsLoading(false);
+      setIsWaitingForFirstResponse(false);
     }
   }
 
@@ -71,10 +96,31 @@ export function ResumeChat() {
                   : 'bg-gray-700 text-gray-100'
               }`}
             >
-              {message.content}
+              <ReactMarkdown
+                components={{
+                  a: ({ node, ...props }) => (
+                    <a
+                      {...props}
+                      className="text-blue-300 hover:text-blue-200 underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    />
+                  ),
+                }}
+              >
+                {message.content}
+              </ReactMarkdown>
             </div>
           </div>
         ))}
+        {isWaitingForFirstResponse && (
+          <div className="flex justify-start">
+            <div className="bg-gray-700 rounded-lg px-4 py-2">
+              <LoadingDots />
+            </div>
+          </div>
+        )}
+        <div ref={messagesEndRef} />
       </div>
 
       <form onSubmit={handleSubmit} className="border-t border-gray-700 p-4">

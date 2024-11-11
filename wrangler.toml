@@ -1,4 +1,4 @@
-name = "cloudflare-saas-stack"
+name = "dominik"
 compatibility_date = "2024-09-03"
 compatibility_flags = [ "nodejs_compat" ]
 pages_build_output_dir = ".vercel/output/static"
@@ -6,8 +6,3 @@ pages_build_output_dir = ".vercel/output/static"
 [placement]
 mode = "smart"
 
-[[d1_databases]]
-binding = "DATABASE"
-database_name = "profile-db"
-database_id = "51267fe9-9fbd-47fc-aee0-12acfc704c18"
-migrations_dir = "./drizzle"
