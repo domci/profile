@@ -299,8 +299,19 @@ export function Resume() {
                   {edu.startDate} - {edu.endDate}
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-gray-200">
-                  {edu.details.map((detail) => (
-                    <li key={detail}>{detail}</li>
+                  {edu.details.map((detail, index) => (
+                    typeof detail === 'string' ? (
+                      <li key={index}>{detail}</li>
+                    ) : (
+                      <li key={index} className="space-y-2">
+                        {detail.title}
+                        <ul className="list-disc list-inside ml-6 space-y-1 text-gray-300">
+                          {detail.subItems.map((subItem, subIndex) => (
+                            <li key={subIndex}>{subItem}</li>
+                          ))}
+                        </ul>
+                      </li>
+                    )
                   ))}
                 </ul>
               </div>
