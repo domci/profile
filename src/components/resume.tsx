@@ -33,21 +33,25 @@ export function Resume() {
           </div>
 
           <div className="flex items-center justify-center mb-12">
-            <AudioPlayer audioUrl="/audio/podcast.wav" />
+            <AudioPlayer 
+              audioUrl="/audio/podcast.m4a" 
+              audioType="audio/mp4"
+            />
           </div>
 
           <div className="flex flex-wrap justify-center gap-8 mb-12">
             {resumeData.experiences.map((exp) => (
-              <div 
-                key={exp.company} 
+              <div
+                key={exp.company}
                 className="relative w-24 h-24 transition-all duration-300"
               >
-                <img
+                <Image
                   src={`/companies/${exp.company.toLowerCase().replace(/\s+/g, '-')}.png`}
                   alt={`${exp.company} logo`}
-                  className="object-contain w-full h-full"
                   width={96}
                   height={96}
+                  className="object-contain w-full h-full"
+                  quality={100}
                 />
               </div>
             ))}

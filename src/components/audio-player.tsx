@@ -4,9 +4,10 @@ import { useState, useRef, useEffect } from 'react'
 
 interface AudioPlayerProps {
   audioUrl: string
+  audioType?: string
 }
 
-export function AudioPlayer({ audioUrl }: AudioPlayerProps) {
+export function AudioPlayer({ audioUrl, audioType = 'audio/wav' }: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [duration, setDuration] = useState(0)
@@ -14,37 +15,62 @@ export function AudioPlayer({ audioUrl }: AudioPlayerProps) {
   const animationRef = useRef<number>()
 
   useEffect(() => {
-    if (audioRef.current) {
-      setDuration(audioRef.current.duration)
+    const audio = audioRef.current
+    if (!audio) return
+
+    const setAudioData = () => {
+      setDuration(audio.duration)
+      setProgress((audio.currentTime / audio.duration) * 100)
     }
-  }, [audioRef.current?.onloadedmetadata, audioRef.current?.readyState])
+
+    const updateProgress = () => {
+      setProgress((audio.currentTime / audio.duration) * 100)
+      animationRef.current = requestAnimationFrame(updateProgress)
+    }
+
+    audio.addEventListener('loadedmetadata', setAudioData)
+    audio.addEventListener('timeupdate', updateProgress)
+
+    return () => {
+      audio.removeEventListener('loadedmetadata', setAudioData)
+      audio.removeEventListener('timeupdate', updateProgress)
+      cancelAnimationFrame(animationRef.current!)
+    }
+  }, [])
 
   function togglePlay() {
-    if (!audioRef.current) return
+    const audio = audioRef.current
+    if (!audio) return
 
     if (isPlaying) {
-      audioRef.current.pause()
+      audio.pause()
       cancelAnimationFrame(animationRef.current!)
     } else {
-      audioRef.current.play()
-      animationRef.current = requestAnimationFrame(updateProgress)
+      audio.play()
+      animationRef.current = requestAnimationFrame(function update() {
+        setProgress((audio.currentTime / audio.duration) * 100)
+        animationRef.current = requestAnimationFrame(update)
+      })
     }
     setIsPlaying(!isPlaying)
   }
 
-  function updateProgress() {
-    if (audioRef.current) {
-      setProgress((audioRef.current.currentTime / duration) * 100)
-      animationRef.current = requestAnimationFrame(updateProgress)
-    }
-  }
-
   function seek(e: React.MouseEvent<HTMLDivElement>) {
-    if (!audioRef.current) return
+    const audio = audioRef.current
+    if (!audio) return
+
     const rect = e.currentTarget.getBoundingClientRect()
-    const percent = (e.clientX - rect.left) / rect.width
-    audioRef.current.currentTime = percent * duration
-    setProgress(percent * 100)
+    const clickPosition = e.clientX - rect.left
+    const percent = clickPosition / rect.width
+
+    const boundedPercent = Math.min(Math.max(percent, 0), 1)
+    
+    audio.currentTime = boundedPercent * audio.duration
+    setProgress(boundedPercent * 100)
+
+    if (isPlaying) {
+      audio.play()
+    }
   }
 
   return (
@@ -106,14 +132,21 @@ export function AudioPlayer({ audioUrl }: AudioPlayerProps) {
       </div>
 
       <div 
-        className="w-full h-1.5 bg-gray-700/50 rounded-full mt-8 cursor-pointer relative overflow-hidden"
+        className="group w-full h-8 flex items-center cursor-pointer"
         onClick={seek}
+        role="slider"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={progress}
       >
-        <div 
-          className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full relative"
-          style={{ width: `${progress}%` }}
-        >
-          <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-md"></div>
+        <div className="w-full h-1.5 bg-gray-700/50 rounded-full relative overflow-hidden">
+          <div 
+            className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full relative group-hover:from-blue-600 group-hover:to-purple-700"
+            style={{ width: `${progress}%` }}
+          >
+            <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-md 
+                            opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
         </div>
       </div>
 
@@ -126,10 +159,17 @@ export function AudioPlayer({ audioUrl }: AudioPlayerProps) {
         </div>
       </div>
 
-      <div className="text-xs text-muted-foreground mt-6 text-center">
+      <div className="text-xs text-muted-foreground/60 mt-6 text-center italic">
+        * Not 100% accurate but fun
       </div>
 
-      <audio ref={audioRef} src={audioUrl} />
+      <audio 
+        ref={audioRef} 
+        src={audioUrl} 
+        preload="metadata"
+      >
+        Your browser does not support the audio element.
+      </audio>
     </div>
   )
 }
