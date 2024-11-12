@@ -11,7 +11,7 @@ export interface EducationEntry {
   institution: string;
   startDate: string;
   endDate: string;
-  details: string[];
+  details: (string | { title: string; subItems: string[] })[];
 }
 
 export interface TechnicalSkills {
@@ -141,12 +141,16 @@ export const resumeData: ResumeData = {
         'Credit card fraud detection',
         'Car rental review analysis by building a Yelp.com web crawler',
         'Text-based rental car classification',
-        'Studies included:',
-        '- Click prediction with user journey data (research project)',
-        '- Quantitative sciences (time series analysis, decomposition, and prediction)',
-        '- Risk management (Basel III, MaRisk, CAPM)',
-        '- Corporate controlling',
-        '- Financial management',
+        {
+          title: 'Studies included:',
+          subItems: [
+            'Click prediction with user journey data (research project)',
+            'Quantitative sciences (time series analysis, decomposition, and prediction)',
+            'Risk management (Basel III, MaRisk, CAPM)',
+            'Corporate controlling',
+          ]
+        },
+        'Financial management'
       ],
     }
   ],
