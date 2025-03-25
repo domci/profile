@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,7 +9,7 @@ import { useSearchParams } from 'next/navigation';
 // The access code
 const CORRECT_CODE = 'DOM15APRO';
 
-export default function AccessPage() {
+function AccessPageContent() {
   const searchParams = useSearchParams();
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
@@ -132,5 +132,13 @@ export default function AccessPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function AccessPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AccessPageContent />
+    </Suspense>
   );
 } 
