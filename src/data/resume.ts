@@ -1,4 +1,4 @@
-export interface Experience {
+interface Experience {
   title: string;
   company: string;
   startDate: string;
@@ -6,7 +6,7 @@ export interface Experience {
   responsibilities: string[];
 }
 
-export interface EducationEntry {
+interface EducationEntry {
   degree: string;
   institution: string;
   startDate: string;
@@ -14,7 +14,7 @@ export interface EducationEntry {
   details: (string | { title: string; subItems: string[] })[];
 }
 
-export interface TechnicalSkills {
+interface TechnicalSkills {
   generativeAI: string[];
   cloudPlatforms: string[];
   programmingLanguages: string[];
@@ -25,7 +25,7 @@ export interface TechnicalSkills {
   containersAndOS: string[];
 }
 
-export interface Project {
+interface Project {
   title: string;
   screenshot: {
     src: string;
@@ -36,7 +36,7 @@ export interface Project {
   liveUrl: string;
 }
 
-export interface ResumeData {
+interface ResumeData {
   name: string;
   title: string;
   summary: string;

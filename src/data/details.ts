@@ -1,4 +1,4 @@
-export interface AdditionalDetails {
+interface AdditionalDetails {
     salaryExpectations: string;
     hourlyRate: string;
     locationPreferences: string;
