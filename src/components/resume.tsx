@@ -25,8 +25,8 @@ export function Resume() {
             {resumeData.title}
           </h2>
           <div className="max-w-2xl mx-auto text-xl mb-12 leading-relaxed">
-            {resumeData.summary.split('\n').map((paragraph, idx) => (
-              <p key={idx} className="mb-4">
+            {resumeData.summary.split('\n').map((paragraph) => (
+              <p key={`summary-${paragraph.substring(0, 20).replace(/\s+/g, '-')}`} className="mb-4">
                 {paragraph}
               </p>
             ))}
@@ -64,7 +64,7 @@ export function Resume() {
                   Freelance Projects
                 </span>
                 <span className="px-4 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium">
-                  Full-Time Remote
+                  Full-Time Remote/Hybrid
                 </span>
               </div>
             </div>
@@ -301,13 +301,13 @@ export function Resume() {
                 <ul className="list-disc list-inside space-y-2 text-gray-200">
                   {edu.details.map((detail, index) => (
                     typeof detail === 'string' ? (
-                      <li key={index}>{detail}</li>
+                      <li key={`edu-detail-${edu.institution}-${index}`}>{detail}</li>
                     ) : (
-                      <li key={index} className="space-y-2">
+                      <li key={`edu-detail-${edu.institution}-${detail.title}-${index}`} className="space-y-2">
                         {detail.title}
                         <ul className="list-disc list-inside ml-6 space-y-1 text-gray-300">
                           {detail.subItems.map((subItem, subIndex) => (
-                            <li key={subIndex}>{subItem}</li>
+                            <li key={`subitem-${detail.title}-${subIndex}-${subItem.substring(0, 10)}`}>{subItem}</li>
                           ))}
                         </ul>
                       </li>

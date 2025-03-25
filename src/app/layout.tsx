@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fira_Code } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
@@ -40,6 +41,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://assets.onedollarstats.com/stonks.js"
+          defer
+          strategy="afterInteractive"
+        />
+      </head>
       <body className={`${firaCode.className} terminal-background`}>
         {children}
       </body>
