@@ -1,8 +1,0 @@
-{
-  "mode": "gpt-4",
-  "promptModule": "@commitlint/config-conventional",
-  "skipCI": false,
-  "skipEmoji": false,
-  "titleMaxLength": 70,
-  "commentMaxLength": 70
-} 
