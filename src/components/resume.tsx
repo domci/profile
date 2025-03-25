@@ -33,7 +33,7 @@ export function Resume() {
           </div>
 
           <div className="flex items-center justify-center mb-12">
-            <AudioPlayer audioUrl="/audio/podcast.wav" />
+            <AudioPlayer audioUrl="/audio/podcast.m4a" />
           </div>
 
           <div className="flex flex-wrap justify-center gap-8 mb-12">
