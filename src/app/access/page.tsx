@@ -4,17 +4,28 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useSearchParams } from 'next/navigation';
 
 // The access code
 const CORRECT_CODE = 'DOM15APRO';
 
 export default function AccessPage() {
+  const searchParams = useSearchParams();
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [displayedTitle, setDisplayedTitle] = useState('');
   const [titleComplete, setTitleComplete] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
+
+  // Check for access code in URL
+  useEffect(() => {
+    const accessCode = searchParams.get('accesscode');
+    if (accessCode === CORRECT_CODE) {
+      document.cookie = "access_token=valid; path=/; max-age=604800"; // 7 days
+      window.location.href = '/';
+    }
+  }, [searchParams]);
 
   // Simulate typing effect for title
   useEffect(() => {
@@ -93,7 +104,7 @@ export default function AccessPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex items-center text-sm text-gray-400 mb-2">
               <span className="mr-2">$</span>
-              <span>authenticate --user dom</span>
+              <span>authenticate --user recruiter</span>
             </div>
             <div className="flex items-center">
               <span className="mr-2 text-blue-400">&#62;</span>

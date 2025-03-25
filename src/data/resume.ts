@@ -60,11 +60,11 @@ export const resumeData: ResumeData = {
       startDate: 'Jan. 2024',
       endDate: 'Present',
       responsibilities: [
-        'GenAI-based Partner Chat-Bot with RAG pipeline in Azure Cloud',
+        'GenAI-based, agentic Partner Chat-Bot with RAG and tool usage in Azure Cloud',
         'enforcement of Chatbot security, compliance and quality of answers',
         'Kill Switch for all team projects to handle critical security issues',
         'Budget Watchdog for Azure resources',
-        'Sparring partner for business and product teams on GenAI and ML topics',
+        'Sparring partner for business and product teams on GenAI, AI and ML topics',
         'Responsible for data and IT security protocols within the team',
       ],
     },
@@ -156,24 +156,24 @@ export const resumeData: ResumeData = {
   ],
   projects: [
     {
+      title: "Quest-Hero.de",
+      screenshot: {
+        src: "/projects/quest-hero.jpeg",
+        alt: "Quest-Hero",
+        width: 1920,
+        height: 1080
+      },
+      liveUrl: "quest-hero.de"
+    },
+    {
       title: "unclutter.pages.dev",
       screenshot: {
         src: "/projects/unclutter.png",
-        alt: "Resume Builder Dashboard",
+        alt: "Unclutter",
         width: 1920,
         height: 1080
       },
       liveUrl: "https://unclutter.pages.dev"
-    },
-    {
-      title: "@LongLifeEasy",
-      screenshot: {
-        src: "/projects/longlive.png",
-        alt: "@LongLifeEasy",
-        width: 1920,
-        height: 1080
-      },
-      liveUrl: "https://x.com/LongLifeEasy"
     },
     {
       title: "@BitcoinBottomTop",
@@ -196,26 +196,6 @@ export const resumeData: ResumeData = {
       liveUrl: "https://x.com/I_remebr_today"
     },
     {
-      title: "@domLLM",
-      screenshot: {
-        src: "/projects/domllm.png",
-        alt: "@domLLM",
-        width: 1920,
-        height: 1080
-      },
-      liveUrl: "https://x.com/DomLLM"
-    },
-    {
-      title: "Quizzly (WiP)",
-      screenshot: {
-        src: "/projects/quizzly.png",
-        alt: "Quizzly",
-        width: 1920,
-        height: 1080
-      },
-      liveUrl: ""
-    }    ,
-    {
       title: "Quantum Crumbs Books",
       screenshot: {
         src: "/projects/quantumcrumbs.png",
@@ -233,7 +213,7 @@ export const resumeData: ResumeData = {
     cloudPlatforms: [
       'GCP', 'Vertex AI', 'BigQuery', 'Pub/Sub', 'CloudRun', 'AppEngine', 'CloudFunctions', 'DataProc', 'Datastore', 'Compute Engine',
       'AWS', 'EC2', 'S3', 'RDS',
-      'Azure', 'Azure OpenAI', 'Azure Cognitive Services', 'Azure SQL', 'Container Apps', 'VMs'
+      'Azure', 'Azure AI Foundry', 'Azure OpenAI', 'Azure Cognitive Services', 'Azure SQL', 'Container Apps', 'VMs'
     ],
     programmingLanguages: [
       'Python', 'Typescript', 'Next.js', 'R', 'SQL', 'NoSQL',
