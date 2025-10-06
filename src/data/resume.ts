@@ -204,6 +204,16 @@ export const resumeData: ResumeData = {
         height: 1080
       },
       liveUrl: "https://www.amazon.com/dp/B0DLH7WSCF"
+    },
+    {
+      title: "wo-kindergeburstag-feiern.de",
+      screenshot: {
+        src: "/projects/domllm.png",
+        alt: "wo-kindergeburstag-feiern.de",
+        width: 1920,
+        height: 1080
+      },
+      liveUrl: "https://wo-kindergeburstag-feiern.de"
     }
   ],
   technicalSkills: {
