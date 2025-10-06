@@ -3,20 +3,22 @@
 import { useState } from 'react'
 import { ResumeChat } from '@/components/resume-chat'
 import { Resume } from '@/components/resume'
+import { useLanguage } from '@/lib/language-context'
 
 export default function ProfilePage() {
   const [isChatOpen, setIsChatOpen] = useState(false)
+  const { t } = useLanguage()
 
   return (
     <div className="relative min-h-screen bg-gray-900 text-white overflow-hidden">
-      <button 
+      <button
         type="button"
-        className="fixed top-4 right-4 z-50 bg-blue-600 p-2 rounded-full hover:bg-blue-700 
+        className="fixed top-4 right-4 z-50 bg-blue-600 p-2 rounded-full hover:bg-blue-700
           transition-colors shadow-lg animate-bounce-subtle hover:animate-none"
         onClick={() => setIsChatOpen(prev => !prev)}
         aria-label="Toggle chat"
       >
-        <img 
+        <img
           src="/chat.png"
           alt="Chat Icon"
           className="w-8 h-8"
@@ -29,17 +31,17 @@ export default function ProfilePage() {
         <div className="fixed inset-0 z-40 bg-black bg-opacity-50 flex items-end sm:items-center justify-center p-4">
           <div className="bg-gray-800 w-full max-w-md h-[600px] rounded-t-lg sm:rounded-lg shadow-xl flex flex-col">
             <div className="flex justify-between items-center p-4 border-b border-gray-700">
-              <h3 className="text-lg font-semibold">Chat with AI Assistant</h3>
-              <button 
+              <h3 className="text-lg font-semibold">{t('chat.title')}</h3>
+              <button
                 type="button"
                 onClick={() => setIsChatOpen(false)}
                 className="text-gray-400 hover:text-white"
-                aria-label="Close chat"
+                aria-label={t('chat.close')}
               >
-                <svg 
-                  className="w-6 h-6" 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                 >
@@ -104,7 +106,7 @@ export default function ProfilePage() {
 
       <footer className="relative z-20 bg-gray-900 py-8">
         <div className="container mx-auto px-4 flex justify-center">
-          <p>&copy; 2023 Dominik C. All rights reserved.</p>
+          <p>{t('footer.copyright')}</p>
         </div>
       </footer>
     </div>

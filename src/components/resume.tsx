@@ -1,8 +1,11 @@
 import { resumeData } from '@/data/resume';
 import Image from 'next/image';
 import { AudioPlayer } from '@/components/audio-player';
+import { useLanguage } from '@/lib/language-context';
 
 export function Resume() {
+  const { t } = useLanguage();
+
   return (
     <main className="relative z-20">
       {/* Hero Section */}
@@ -22,10 +25,10 @@ export function Resume() {
             {resumeData.name}
           </h1>
           <h2 className="text-3xl text-blue-400 mb-8">
-            {resumeData.title}
+            {t('hero.title')}
           </h2>
           <div className="max-w-2xl mx-auto text-xl mb-12 leading-relaxed">
-            {resumeData.summary.split('\n').map((paragraph) => (
+            {t('hero.summary').split('\n').map((paragraph) => (
               <p key={`summary-${paragraph.substring(0, 20).replace(/\s+/g, '-')}`} className="mb-4">
                 {paragraph}
               </p>
@@ -55,16 +58,16 @@ export function Resume() {
 
           <div className="max-w-2xl mx-auto mb-12">
             <div className="inline-block px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30">
-              <h3 className="text-xl font-semibold text-blue-400 mb-2">Currently Available For:</h3>
+              <h3 className="text-xl font-semibold text-blue-400 mb-2">{t('hero.availableFor')}</h3>
               <div className="flex flex-wrap justify-center gap-3">
                 <span className="px-4 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium">
-                  Consulting Gigs (Hourly)
+                  {t('hero.consulting')}
                 </span>
                 <span className="px-4 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium">
-                  Freelance Projects
+                  {t('hero.freelance')}
                 </span>
                 <span className="px-4 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium">
-                  Full-Time Remote/Hybrid
+                  {t('hero.fullTime')}
                 </span>
               </div>
             </div>
@@ -77,7 +80,7 @@ export function Resume() {
               rel="noopener noreferrer"
               className="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-6 py-3 rounded-md transform hover:scale-105 transition-transform"
             >
-              Contact Me
+{t('hero.contactMe')}
             </a>
             
             <div className="flex justify-center space-x-4">
@@ -121,7 +124,7 @@ export function Resume() {
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
-            Pet Projects
+            {t('sections.petProjects')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {resumeData.projects.map((project) => (
@@ -186,7 +189,7 @@ export function Resume() {
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
-            Skills
+            {t('sections.skills')}
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {/* Technical Skills */}
@@ -198,10 +201,7 @@ export function Resume() {
                   className="bg-gray-800/50 rounded-lg p-4 backdrop-blur-sm hover:bg-gray-800/70 transition-colors"
                 >
                   <h3 className="text-sm font-semibold text-indigo-400 mb-2 pb-1 border-b border-indigo-400/20">
-                    {category
-                      .replace(/([a-z])([A-Z])/g, '$1 $2')
-                      .replace(/^./, (str) => str.toUpperCase())
-                      .replace(/\bAI\b/g, 'AI')}
+                    {t(`skills.${category}`)}
                   </h3>
                   <div className="flex flex-wrap gap-1">
                     {skills.map((skill: string) => (
@@ -219,7 +219,7 @@ export function Resume() {
             {/* Languages Card */}
             <div className="bg-gray-800/50 rounded-lg p-4 backdrop-blur-sm hover:bg-gray-800/70 transition-colors">
               <h3 className="text-sm font-semibold text-indigo-400 mb-2 pb-1 border-b border-indigo-400/20">
-                Languages
+                {t('skills.languages')}
               </h3>
               <div className="flex flex-wrap gap-1">
                 {resumeData.languages.map((language) => (
@@ -236,7 +236,7 @@ export function Resume() {
             {/* Soft Skills Card */}
             <div className="bg-gray-800/50 rounded-lg p-4 backdrop-blur-sm hover:bg-gray-800/70 transition-colors">
               <h3 className="text-sm font-semibold text-indigo-400 mb-2 pb-1 border-b border-indigo-400/20">
-                Soft Skills
+                {t('skills.softSkills')}
               </h3>
               <div className="flex flex-wrap gap-1">
                 {resumeData.softSkills.map((skill) => (
@@ -258,7 +258,7 @@ export function Resume() {
       <section className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-4xl w-full">
           <h2 className="text-5xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
-            Work Experience
+            {t('sections.workExperience')}
           </h2>
           <div className="space-y-8">
             {resumeData.experiences.map((exp) => (
@@ -267,7 +267,7 @@ export function Resume() {
                   {exp.title} - {exp.company}
                 </h3>
                 <p className="text-gray-400 mb-4">
-                  {exp.startDate} - {exp.endDate}
+                  {exp.startDate} - {exp.endDate === 'Present' ? t('common.present') : exp.endDate}
                 </p>
                 <ul className="list-disc space-y-2 text-gray-200 ml-4">
                   {exp.responsibilities.map((resp) => (
@@ -287,7 +287,7 @@ export function Resume() {
       <section className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-4xl w-full">
           <h2 className="text-5xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-600">
-            Education
+            {t('sections.education')}
           </h2>
           <div className="space-y-8">
             {resumeData.education.map((edu) => (
@@ -296,7 +296,7 @@ export function Resume() {
                   {edu.degree} - {edu.institution}
                 </h3>
                 <p className="text-gray-400 mb-4">
-                  {edu.startDate} - {edu.endDate}
+                  {edu.startDate} - {edu.endDate === 'Present' ? t('common.present') : edu.endDate}
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-gray-200">
                   {edu.details.map((detail, index) => (
