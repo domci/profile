@@ -38,7 +38,10 @@ const translations = {
     'common.present': 'Present',
     'footer.copyright': '© 2023 Dominik C. All rights reserved.',
     'chat.title': 'Chat with AI Assistant',
-    'chat.close': 'Close chat'
+    'chat.close': 'Close chat',
+    'chat.initialMessage': 'Hi! I can help you learn more about 🔥 Dominik 🔥. What would you like to know?',
+    'chat.placeholder': 'Ask me anything...',
+    'chat.send': 'Send'
   },
   de: {
     'hero.title': 'Leidenschaft für KI und Daten.',
@@ -65,7 +68,10 @@ const translations = {
     'common.present': 'Gegenwart',
     'footer.copyright': '© 2023 Dominik C. Alle Rechte vorbehalten.',
     'chat.title': 'Chatte mit KI-Assistenten',
-    'chat.close': 'Chat schließen'
+    'chat.close': 'Chat schließen',
+    'chat.initialMessage': 'Hallo! Ich kann dir helfen, mehr über 🔥 Dominik 🔥 zu erfahren. Was möchtest du wissen?',
+    'chat.placeholder': 'Frag mich was...',
+    'chat.send': 'Senden'
   }
 };
 

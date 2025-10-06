@@ -79,7 +79,14 @@ ${detailsText}
   });
 
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    // Try to parse JSON error response
+    try {
+      const errorData = await response.json() as { error?: string };
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    } catch (parseError) {
+      // If JSON parsing fails, fall back to generic error
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
   }
 
   if (!response.body) {

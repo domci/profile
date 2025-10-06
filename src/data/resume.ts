@@ -166,6 +166,16 @@ export const resumeData: ResumeData = {
       liveUrl: "quest-hero.de"
     },
     {
+      title: "wo-kindergeburstag-feiern.de",
+      screenshot: {
+        src: "/projects/kige.png",
+        alt: "wo-kindergeburstag-feiern.de",
+        width: 1920,
+        height: 1080
+      },
+      liveUrl: "https://wo-kindergeburstag-feiern.de"
+    },
+    {
       title: "unclutter.pages.dev",
       screenshot: {
         src: "/projects/unclutter.png",
@@ -204,16 +214,6 @@ export const resumeData: ResumeData = {
         height: 1080
       },
       liveUrl: "https://www.amazon.com/dp/B0DLH7WSCF"
-    },
-    {
-      title: "wo-kindergeburstag-feiern.de",
-      screenshot: {
-        src: "/projects/domllm.png",
-        alt: "wo-kindergeburstag-feiern.de",
-        width: 1920,
-        height: 1080
-      },
-      liveUrl: "https://wo-kindergeburstag-feiern.de"
     }
   ],
   technicalSkills: {

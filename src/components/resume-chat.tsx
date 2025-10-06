@@ -20,16 +20,20 @@ function LoadingDots() {
   );
 }
 
+const MAX_MESSAGE_LENGTH = 300;
+
 export function ResumeChat() {
+  const { t } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: 'Hi! I can help you learn more about 🔥 Dominik 🔥. What would you like to know?'
+      content: t('chat.initialMessage')
     }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isWaitingForFirstResponse, setIsWaitingForFirstResponse] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -42,16 +46,21 @@ export function ResumeChat() {
   }, [messages]);
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
-    setInput(e.target.value);
+    const value = e.target.value;
+    // Limit input to MAX_MESSAGE_LENGTH characters
+    if (value.length <= MAX_MESSAGE_LENGTH) {
+      setInput(value);
+    }
   }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || input.length > MAX_MESSAGE_LENGTH) return;
 
     const userMessage: Message = { role: 'user', content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
+    setError(null); // Clear any previous errors
     setIsLoading(true);
     setIsWaitingForFirstResponse(true);
 
@@ -74,6 +83,9 @@ export function ResumeChat() {
       });
     } catch (error) {
       console.error('Error fetching chat response:', error);
+      setError(error instanceof Error ? error.message : 'An error occurred while sending your message');
+      // Remove the user message if there was an error
+      setMessages((prev) => prev.slice(0, -1));
     } finally {
       setIsLoading(false);
       setIsWaitingForFirstResponse(false);
@@ -91,7 +103,7 @@ export function ResumeChat() {
             }`}
           >
             <div
-              className={`max-w-[80%] rounded-lg px-4 py-2 ${
+              className={`max-w-[80%] rounded-lg px-4 py-2 break-words ${
                 message.role === 'user'
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-700 text-gray-100'
@@ -124,21 +136,47 @@ export function ResumeChat() {
         <div ref={messagesEndRef} />
       </div>
 
+      {error && (
+        <div className="border-t border-red-700 bg-red-900/20 p-4">
+          <div className="text-red-400 text-sm">
+            <strong>Error:</strong> {error}
+          </div>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="border-t border-gray-700 p-4">
         <div className="flex gap-2">
-          <input
-            value={input}
-            onChange={handleInputChange}
-            placeholder="Ask me anything..."
-            className="flex-1 bg-gray-700 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            disabled={isLoading}
-          />
+          <div className="flex-1 relative">
+            <input
+              value={input}
+              onChange={handleInputChange}
+              placeholder={t('chat.placeholder')}
+              className={`w-full bg-gray-700 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${
+                input.length > MAX_MESSAGE_LENGTH * 0.9
+                  ? 'focus:ring-red-500'
+                  : 'focus:ring-blue-500'
+              }`}
+              disabled={isLoading}
+              maxLength={MAX_MESSAGE_LENGTH}
+            />
+            <div className={`absolute bottom-1 right-2 text-xs ${
+              input.length > MAX_MESSAGE_LENGTH * 0.9
+                ? 'text-red-400'
+                : 'text-gray-400'
+            }`}>
+              {input.length}/{MAX_MESSAGE_LENGTH}
+            </div>
+          </div>
           <button
             type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-            disabled={isLoading}
+            className={`px-4 py-2 rounded-lg transition-colors ${
+              input.trim() && input.length <= MAX_MESSAGE_LENGTH && !isLoading
+                ? 'bg-blue-600 text-white hover:bg-blue-700'
+                : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+            }`}
+            disabled={isLoading || !input.trim() || input.length > MAX_MESSAGE_LENGTH}
           >
-            {isLoading ? 'Sending...' : 'Send'}
+            {t('chat.send')}
           </button>
         </div>
       </form>

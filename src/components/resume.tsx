@@ -126,7 +126,7 @@ export function Resume() {
           <h2 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
             {t('sections.petProjects')}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {resumeData.projects.map((project) => (
               <div
                 key={project.title}
