@@ -42,7 +42,7 @@ const translations = {
   },
   de: {
     'hero.title': 'Leidenschaft für KI und Daten.',
-    'hero.summary': '+10 Jahre Berufserfahrung in der Erfassung, Organisation, Analyse, Visualisierung von Daten und Bereitstellung verschiedener KI- und Datenprodukte. Kundenorientierter, neugieriger und schnell lernender Engineer mit Spezialist, entschlossen, erstaunliche Datenprodukte zu entwickeln.',
+    'hero.summary': '+10 Jahre Berufserfahrung in der Erfassung, Organisation, Analyse, Visualisierung von Daten und Bereitstellung verschiedener KI- und Datenprodukte. Kundenorientierter, neugieriger und schnell lernender Spezialist, entschlossen, erstaunliche Datenprodukte zu entwickeln.',
     'hero.availableFor': 'Derzeit verfügbar für:',
     'hero.consulting': 'Beratungsdienstleistungen',
     'hero.freelance': 'Freiberufliche Projekte',
