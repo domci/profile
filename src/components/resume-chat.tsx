@@ -21,7 +21,6 @@ function LoadingDots() {
 }
 
 export function ResumeChat() {
-  const { t } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
