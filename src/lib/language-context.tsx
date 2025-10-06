@@ -21,7 +21,7 @@ const translations = {
     'hero.freelance': 'Freelance Projects',
     'hero.fullTime': 'Full-Time Remote/Hybrid',
     'hero.contactMe': 'Contact Me',
-    'sections.petProjects': 'Pet Projects',
+    'sections.petProjects': 'Projects',
     'sections.skills': 'Skills',
     'sections.workExperience': 'Work Experience',
     'sections.education': 'Education',
