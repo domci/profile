@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Fira_Code } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import { LanguageProvider } from '@/lib/language-context';
+import { LanguageSelector } from '@/components/language-selector';
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -49,7 +51,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`${firaCode.className} terminal-background`}>
-        {children}
+        <LanguageProvider>
+          <LanguageSelector />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

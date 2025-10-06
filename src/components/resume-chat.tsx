@@ -3,6 +3,7 @@
 import { useState, FormEvent, ChangeEvent, useRef, useEffect } from 'react';
 import { fetchChatResponse } from '@/lib/chat';
 import ReactMarkdown from 'react-markdown';
+import { useLanguage } from '@/lib/language-context';
 
 interface Message {
   role: 'user' | 'assistant';

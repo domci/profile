@@ -3,18 +3,17 @@ import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
-if (
-  !process.env.OPENAI_API_KEY ||
-  !process.env.CF_ACCOUNT_ID ||
-  !process.env.CF_GATEWAY_ID
-) {
-  throw new Error('Required environment variables are not set');
-}
+// Environment variables for chat functionality
+// These are only needed at runtime, not build time
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID;
+const CF_GATEWAY_ID = process.env.CF_GATEWAY_ID;
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  baseURL: `https://gateway.ai.cloudflare.com/v1/${process.env.CF_ACCOUNT_ID}/${process.env.CF_GATEWAY_ID}/openai`,
-});
+// Initialize OpenAI only if environment variables are available
+const openai = OPENAI_API_KEY && CF_ACCOUNT_ID && CF_GATEWAY_ID ? new OpenAI({
+  apiKey: OPENAI_API_KEY,
+  baseURL: `https://gateway.ai.cloudflare.com/v1/${CF_ACCOUNT_ID}/${CF_GATEWAY_ID}/openai`,
+}) : null;
 
 // Add interface for the request body
 interface ChatRequestBody {
@@ -29,6 +28,10 @@ export async function POST(req: NextRequest) {
 
   if (!messages || !Array.isArray(messages)) {
     return new Response('Messages are required', { status: 400 });
+  }
+
+  if (!openai) {
+    return new Response('Chat functionality is not configured', { status: 503 });
   }
 
   try {
